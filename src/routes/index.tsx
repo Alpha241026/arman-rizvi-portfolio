@@ -31,6 +31,7 @@ function Index() {
       <main>
         <Hero />
         <FieldNotes />
+        <Projects />
       </main>
       <footer className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-5 py-8 md:px-10">
         <span className="label-field">Arman Rizvi · Field Record</span>

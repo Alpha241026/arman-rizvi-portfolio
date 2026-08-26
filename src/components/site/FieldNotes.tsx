@@ -12,7 +12,7 @@ const notes = [
   {
     n: "III",
     title: "Still forming",
-    body: "Sections for projects, journey, skills and contact are being excavated. More entries to follow.",
+    body: "Sections for journey, skills and contact are being excavated. More entries to follow.",
   },
 ];
 

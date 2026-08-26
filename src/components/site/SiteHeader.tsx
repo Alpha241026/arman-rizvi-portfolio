@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 
 const nav = [
   { label: "Overview", href: "#overview", stratum: "00", ready: true },
-  { label: "Projects", href: "#projects", stratum: "01", ready: false },
+  { label: "Projects", href: "#projects", stratum: "01", ready: true },
   { label: "Journey", href: "#journey", stratum: "02", ready: false },
   { label: "Skills", href: "#skills", stratum: "03", ready: false },
   { label: "Contact", href: "#contact", stratum: "04", ready: false },
