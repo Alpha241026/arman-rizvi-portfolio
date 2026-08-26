@@ -79,17 +79,32 @@ export function SiteHeader() {
 
       {open && (
         <nav className="border-t border-border/70 bg-card md:hidden">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="flex items-baseline gap-3 border-b border-border/60 px-5 py-3 text-sm last:border-b-0"
-            >
-              <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
-              {item.label}
-            </a>
-          ))}
+          {nav.map((item) =>
+            item.ready ? (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="flex items-baseline gap-3 border-b border-border/60 px-5 py-3 text-sm last:border-b-0"
+              >
+                <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
+                {item.label}
+              </a>
+            ) : (
+              <span
+                key={item.href}
+                aria-disabled
+                className="flex items-baseline gap-3 border-b border-border/60 px-5 py-3 text-sm text-muted-foreground/70 last:border-b-0"
+              >
+                <span className="font-mono text-[0.6rem] text-muted-foreground/60">
+                  {item.stratum}
+                </span>
+                {item.label}
+                <span className="label-field ml-auto text-[0.55rem]">soon</span>
+              </span>
+            ),
+          )}
+
         </nav>
       )}
     </header>
