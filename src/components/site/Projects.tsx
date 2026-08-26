@@ -183,7 +183,7 @@ type Specimen = {
   summary: string;
   work: string[];
   tech: string[];
-  plate: () => JSX.Element;
+  plate: () => React.ReactElement;
   plateCaption: string;
   plateCode: string;
 };
@@ -359,7 +359,8 @@ function SpecimenHeading({ s }: { s: Specimen }) {
 /* ---------- Section ---------- */
 
 export function Projects() {
-  const [featured, ...rest] = specimens;
+  const featured = specimens[0]!;
+  const rest = specimens.slice(1);
   const FeaturedPlate = featured.plate;
 
   return (
