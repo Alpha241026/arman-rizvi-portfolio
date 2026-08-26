@@ -39,17 +39,32 @@ export function SiteHeader() {
         </a>
 
         <nav className="ml-auto hidden items-center gap-7 md:flex">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="group flex items-baseline gap-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
-            >
-              <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
-              <span className="link-underline">{item.label}</span>
-            </a>
-          ))}
+          {nav.map((item) =>
+            item.ready ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group flex items-baseline gap-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
+              >
+                <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
+                <span className="link-underline">{item.label}</span>
+              </a>
+            ) : (
+              <span
+                key={item.href}
+                aria-disabled
+                title="Not yet excavated"
+                className="flex items-baseline gap-1.5 text-sm text-muted-foreground/70"
+              >
+                <span className="font-mono text-[0.6rem] text-muted-foreground/60">
+                  {item.stratum}
+                </span>
+                <span className="border-b border-dotted border-border pb-px">{item.label}</span>
+              </span>
+            ),
+          )}
         </nav>
+
 
         <button
           type="button"
