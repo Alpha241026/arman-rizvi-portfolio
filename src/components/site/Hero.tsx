@@ -57,19 +57,39 @@ export function Hero() {
 
         {/* Right: illustrated plate + stratigraphic column */}
         <div className="grid gap-6 sm:grid-cols-[1fr_auto] lg:gap-8">
-          <figure className="plate paper-grain p-3">
+          <figure className="plate paper-grain relative p-3">
             <img
               src={heroPlate}
-              alt="Engraved natural-history landscape plate with sauropods among ferns at dusk"
+              alt="Engraved natural-history plate: ammonite section, fern specimen, vertebra, limb skeleton and a stratigraphic column with annotations"
               width={1536}
               height={1024}
               className="h-full w-full object-cover"
             />
+            {/* fine annotation overlay — rewards closer inspection */}
+            <svg
+              aria-hidden
+              viewBox="0 0 300 200"
+              preserveAspectRatio="none"
+              className="pointer-events-none absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] opacity-45"
+            >
+              <g stroke="var(--strata)" strokeWidth="0.4" fill="none">
+                <path d="M12 12h16M12 12v16M288 188h-16M288 188v-16" />
+                <path d="M232 34h34M232 34l-14 10" strokeDasharray="2 2" />
+                <path d="M34 168h30M34 168l12-9" strokeDasharray="2 2" />
+              </g>
+              <g fill="var(--ochre)">
+                <circle cx="218" cy="44" r="1.2" />
+                <circle cx="46" cy="159" r="1.2" />
+              </g>
+            </svg>
             <figcaption className="mt-3 flex items-baseline justify-between gap-4 border-t border-border pt-2">
-              <span className="label-field">Plate I — Deep Time</span>
-              <span className="font-mono text-[0.65rem] text-muted-foreground">fig. 1.0</span>
+              <span className="label-field">Plate I — Comparative Study</span>
+              <span className="font-mono text-[0.65rem] text-muted-foreground">
+                fig. 1.0 · spec. AR-01
+              </span>
             </figcaption>
           </figure>
+
 
           <ol className="relative flex flex-col justify-between gap-5 border-l border-border pl-5 sm:w-52">
             {strata.map((s, i) => (

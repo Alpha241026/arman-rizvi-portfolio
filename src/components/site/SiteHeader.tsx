@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
-  { label: "Overview", href: "#overview", stratum: "00" },
-  { label: "Projects", href: "#projects", stratum: "01" },
-  { label: "Journey", href: "#journey", stratum: "02" },
-  { label: "Skills", href: "#skills", stratum: "03" },
-  { label: "Contact", href: "#contact", stratum: "04" },
+  { label: "Overview", href: "#overview", stratum: "00", ready: true },
+  { label: "Projects", href: "#projects", stratum: "01", ready: false },
+  { label: "Journey", href: "#journey", stratum: "02", ready: false },
+  { label: "Skills", href: "#skills", stratum: "03", ready: false },
+  { label: "Contact", href: "#contact", stratum: "04", ready: false },
 ];
+
 
 function Ammonite({ className }: { className?: string }) {
   return (
