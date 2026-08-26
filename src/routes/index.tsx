@@ -1,11 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { StrataBackground } from "@/components/site/StrataBackground";
+import { Hero } from "@/components/site/Hero";
+import { FieldNotes } from "@/components/site/FieldNotes";
+
+const title = "Arman Rizvi — Backend-Oriented Software Engineer";
+const description =
+  "Field record of Arman Rizvi, a CSE student and backend-oriented developer building systems, APIs and clean architecture.";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
 function Index() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background text-foreground" />
+    <div className="min-h-screen">
+      <StrataBackground />
+      <SiteHeader />
+      <main>
+        <Hero />
+        <FieldNotes />
+      </main>
+      <footer className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-5 py-8 md:px-10">
+        <span className="label-field">Arman Rizvi · Field Record</span>
+        <span className="font-mono text-[0.65rem] text-muted-foreground">
+          Edition 01 · in progress
+        </span>
+      </footer>
+    </div>
   );
 }
