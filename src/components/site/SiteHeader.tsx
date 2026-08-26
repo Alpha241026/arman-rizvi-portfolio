@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
-  { label: "Overview", href: "#overview", stratum: "00" },
-  { label: "Projects", href: "#projects", stratum: "01" },
-  { label: "Journey", href: "#journey", stratum: "02" },
-  { label: "Skills", href: "#skills", stratum: "03" },
-  { label: "Contact", href: "#contact", stratum: "04" },
+  { label: "Overview", href: "#overview", stratum: "00", ready: true },
+  { label: "Projects", href: "#projects", stratum: "01", ready: false },
+  { label: "Journey", href: "#journey", stratum: "02", ready: false },
+  { label: "Skills", href: "#skills", stratum: "03", ready: false },
+  { label: "Contact", href: "#contact", stratum: "04", ready: false },
 ];
+
 
 function Ammonite({ className }: { className?: string }) {
   return (
@@ -38,17 +39,32 @@ export function SiteHeader() {
         </a>
 
         <nav className="ml-auto hidden items-center gap-7 md:flex">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="group flex items-baseline gap-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
-            >
-              <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
-              <span className="link-underline">{item.label}</span>
-            </a>
-          ))}
+          {nav.map((item) =>
+            item.ready ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group flex items-baseline gap-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
+              >
+                <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
+                <span className="link-underline">{item.label}</span>
+              </a>
+            ) : (
+              <span
+                key={item.href}
+                aria-disabled
+                title="Not yet excavated"
+                className="flex items-baseline gap-1.5 text-sm text-muted-foreground/70"
+              >
+                <span className="font-mono text-[0.6rem] text-muted-foreground/60">
+                  {item.stratum}
+                </span>
+                <span className="border-b border-dotted border-border pb-px">{item.label}</span>
+              </span>
+            ),
+          )}
         </nav>
+
 
         <button
           type="button"
@@ -63,17 +79,32 @@ export function SiteHeader() {
 
       {open && (
         <nav className="border-t border-border/70 bg-card md:hidden">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="flex items-baseline gap-3 border-b border-border/60 px-5 py-3 text-sm last:border-b-0"
-            >
-              <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
-              {item.label}
-            </a>
-          ))}
+          {nav.map((item) =>
+            item.ready ? (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="flex items-baseline gap-3 border-b border-border/60 px-5 py-3 text-sm last:border-b-0"
+              >
+                <span className="font-mono text-[0.6rem] text-accent">{item.stratum}</span>
+                {item.label}
+              </a>
+            ) : (
+              <span
+                key={item.href}
+                aria-disabled
+                className="flex items-baseline gap-3 border-b border-border/60 px-5 py-3 text-sm text-muted-foreground/70 last:border-b-0"
+              >
+                <span className="font-mono text-[0.6rem] text-muted-foreground/60">
+                  {item.stratum}
+                </span>
+                {item.label}
+                <span className="label-field ml-auto text-[0.55rem]">soon</span>
+              </span>
+            ),
+          )}
+
         </nav>
       )}
     </header>
