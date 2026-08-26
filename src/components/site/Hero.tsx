@@ -35,24 +35,25 @@ export function Hero() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
-              href="#projects"
+              href="#overview"
               className="group inline-flex items-center gap-2 border border-primary bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               Explore the record
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
-            <div className="flex items-center gap-4 text-muted-foreground">
-              <a href="#contact" aria-label="GitHub" className="transition-colors hover:text-accent">
+            <div className="flex items-center gap-4 text-muted-foreground/70">
+              <span aria-label="GitHub — to be added" title="To be added">
                 <Github className="h-5 w-5" />
-              </a>
-              <a href="#contact" aria-label="LinkedIn" className="transition-colors hover:text-accent">
+              </span>
+              <span aria-label="LinkedIn — to be added" title="To be added">
                 <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#contact" aria-label="Email" className="transition-colors hover:text-accent">
+              </span>
+              <span aria-label="Email — to be added" title="To be added">
                 <Mail className="h-5 w-5" />
-              </a>
+              </span>
             </div>
           </div>
+
         </div>
 
         {/* Right: illustrated plate + stratigraphic column */}
