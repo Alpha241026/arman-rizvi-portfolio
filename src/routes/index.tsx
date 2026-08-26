@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { StrataBackground } from "@/components/site/StrataBackground";
 import { Hero } from "@/components/site/Hero";
 import { FieldNotes } from "@/components/site/FieldNotes";
+import { Projects } from "@/components/site/Projects";
 
 const title = "Arman Rizvi — Backend-Oriented Software Engineer";
 const description =
@@ -30,6 +31,7 @@ function Index() {
       <main>
         <Hero />
         <FieldNotes />
+        <Projects />
       </main>
       <footer className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-5 py-8 md:px-10">
         <span className="label-field">Arman Rizvi · Field Record</span>
