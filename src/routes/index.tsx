@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { StrataBackground } from "@/components/site/StrataBackground";
 import { Hero } from "@/components/site/Hero";
 import { FieldNotes } from "@/components/site/FieldNotes";
+import { Projects } from "@/components/site/Projects";
 
 const title = "Arman Rizvi — Backend-Oriented Software Engineer";
 const description =
