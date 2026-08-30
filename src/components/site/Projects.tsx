@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { ChevronDown, ExternalLink, Github } from "lucide-react";
+import chimeraUi from "@/assets/chimera-ui.png.asset.json";
+import memorytrailRepo from "@/assets/memorytrail-repo.png.asset.json";
+import memorytrailBackend from "@/assets/memorytrail-backend.png.asset.json";
+import synclipWeb from "@/assets/synclip-web.png.asset.json";
+import synclipAndroid from "@/assets/synclip-android.png.asset.json";
 
 /* ---------- Diagrammatic specimen plates (hand-drawn SVG, no new deps) ---------- */
 
@@ -20,6 +25,27 @@ function PlateFrame({
       <figcaption className="mt-3 flex items-baseline justify-between gap-4 border-t border-border pt-2">
         <span className="label-field">{caption}</span>
         <span className="font-mono text-[0.65rem] text-muted-foreground">{code}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
+type Capture = { src: string; alt: string; label: string; fig: string };
+
+function FieldCapture({ src, alt, label, fig }: Capture) {
+  return (
+    <figure className="plate paper-grain group/cap p-2">
+      <div className="overflow-hidden border border-border bg-background">
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="block h-auto max-h-[420px] w-full object-contain object-top opacity-[0.94] transition duration-500 group-hover/cap:opacity-100 group-hover/cap:brightness-[1.02]"
+        />
+      </div>
+      <figcaption className="mt-2 flex items-baseline justify-between gap-3 border-t border-border pt-1.5">
+        <span className="label-field text-[0.55rem]">{label}</span>
+        <span className="font-mono text-[0.6rem] text-muted-foreground">{fig}</span>
       </figcaption>
     </figure>
   );
@@ -85,7 +111,7 @@ function LayeredArchitecture() {
         <circle cx="280" cy="31" r="2" fill="var(--ochre)" />
         <circle cx="280" cy="159" r="2" fill="var(--ochre)" />
       </g>
-      <text x={40} y={212} fill="var(--muted-foreground)" fontFamily="var(--font-mono)" fontSize="7" letterSpacing="1">
+      <text x={40} y={212} fill="var(--muted-foreground)" fontFamily="var(--font-mono)" fontSize="5.8" letterSpacing="0.4">
         REQUEST → VALIDATION → EXTERNAL EXECUTION → STANDARDISED RESPONSE
       </text>
     </svg>
@@ -178,6 +204,7 @@ function SyncDiagram() {
 type Specimen = {
   n: string;
   name: string;
+  focus: string;
   period: string;
   classification: string;
   summary: string;
@@ -186,34 +213,51 @@ type Specimen = {
   plate: () => React.ReactElement;
   plateCaption: string;
   plateCode: string;
+  captures: Capture[];
+  repo?: { label: string; url: string; privateArchive?: boolean };
+  archiveNote?: string;
 };
 
 const specimens: Specimen[] = [
   {
     n: "01",
     name: "Chimera API Workspace",
+    focus: "Architecture",
     period: "August 2026 — Present",
     classification: "Developer tooling · Layered backend",
     summary:
       "A developer-focused API workspace for organizing, configuring, executing and inspecting HTTP requests through a unified interface.",
     work: [
       "Layered Flask backend: Route → Controller → Service → Repository → Model",
-      "Dependency injection",
+      "Dependency injection between layers",
       "Project and Endpoint CRUD",
       "Hierarchical project → endpoint ownership",
       "Reusable request definitions",
       "Request validation and JSON handling",
       "External API execution with standardized responses",
-      "Dynamic frontend rendering",
+      "Dynamic frontend rendering with vanilla JavaScript and the Fetch API",
+      "In-memory storage currently used to validate the architecture",
+      "PostgreSQL persistence planned",
+      "Dedicated Go execution subsystem planned as a later architectural slice",
     ],
-    tech: ["HTML5", "CSS3", "JavaScript", "Python", "Flask"],
+    tech: ["HTML5", "CSS3", "JavaScript", "Fetch API", "Python", "Flask"],
     plate: LayeredArchitecture,
     plateCaption: "Plate II — Architectural Section",
     plateCode: "fig. 2.0 · spec. AR-P01",
+    captures: [
+      {
+        src: chimeraUi.url,
+        alt: "Chimera API workspace interface showing projects, endpoint configuration and a JSON response panel",
+        label: "Interface specimen",
+        fig: "fig. 2.1",
+      },
+    ],
+    repo: { label: "Alpha241026/Project-Chimera", url: "https://github.com/Alpha241026/Project-Chimera" },
   },
   {
     n: "02",
     name: "MemoryTrail",
+    focus: "Domain & relationships",
     period: "February 2026",
     classification: "Full-stack web · Team of four",
     summary:
@@ -222,17 +266,18 @@ const specimens: Specimen[] = [
       "Four-member team project",
       "Designed and tested backend models and routes for users, trips and memories",
       "Backend integration with the React frontend",
-      "Memory timeline and trip statistics",
-      "Location data storage",
-      "Modular backend architecture",
-      "Cross-team development under hackathon constraints",
+      "Registration and login with bcrypt password hashing and JWT authentication",
+      "User ownership checks across trips and memories",
+      "Trip creation with name, dates and cover image",
+      "Memories with title, notes, photo uploads via Multer and latitude / longitude",
+      "Chronological memory timeline, search by title, location or notes",
+      "Date-range filtering, pagination and trip statistics",
     ],
     tech: [
-      "HTML5",
-      "CSS3",
-      "JavaScript",
       "React",
       "Vite",
+      "React Router",
+      "JavaScript",
       "Node.js",
       "Express.js",
       "MongoDB",
@@ -244,10 +289,26 @@ const specimens: Specimen[] = [
     plate: RelationDiagram,
     plateCaption: "Plate III — Relation Study",
     plateCode: "fig. 3.0 · spec. AR-P02",
+    captures: [
+      {
+        src: memorytrailBackend.url,
+        alt: "MemoryTrail backend repository structure with config, controllers, middleware, models and routes directories",
+        label: "Backend structure",
+        fig: "fig. 3.1",
+      },
+      {
+        src: memorytrailRepo.url,
+        alt: "MemoryTrail GitHub repository page showing the README and contributors",
+        label: "Repository record",
+        fig: "fig. 3.2",
+      },
+    ],
+    repo: { label: "AjayGodara2/MemoryTrail", url: "https://github.com/AjayGodara2/MemoryTrail" },
   },
   {
     n: "03",
     name: "Synclip",
+    focus: "Real-time flow",
     period: "November 2025 — December 2025",
     classification: "Real-time sync · Web + Android",
     summary:
@@ -256,14 +317,35 @@ const specimens: Specimen[] = [
       "Collaborative team project",
       "Mobile application built with Flutter",
       "Communication between the JavaScript web side and the mobile app",
-      "Firebase Firestore backend",
+      "Firebase Firestore realtime state shared by both clients",
+      "Firestore realtime listener with debounced synchronization",
+      "Web Clipboard API interaction — copy, paste and clear",
       "Tested bidirectional text transfer and simultaneous sharing / deletion",
-      "Focused on reliable synchronization without race conditions or synchronization bugs",
+      "Focused on reliable synchronization without race conditions",
     ],
     tech: ["HTML5", "CSS3", "JavaScript", "Flutter", "Web Clipboard API", "Firebase Firestore"],
     plate: SyncDiagram,
     plateCaption: "Plate IV — Flow Study",
     plateCode: "fig. 4.0 · spec. AR-P03",
+    captures: [
+      {
+        src: synclipWeb.url,
+        alt: "Synclip web client with a text area and copy, paste and clear controls",
+        label: "Web client",
+        fig: "fig. 4.1",
+      },
+      {
+        src: synclipAndroid.url,
+        alt: "Synclip Android client built with Flutter, showing the shared text field and copy, paste and clear controls",
+        label: "Android client",
+        fig: "fig. 4.2",
+      },
+    ],
+    repo: {
+      label: "Alpha241026/SynClip",
+      url: "https://github.com/Alpha241026/SynClip",
+      privateArchive: true,
+    },
   },
 ];
 
@@ -284,55 +366,86 @@ function TechList({ tech }: { tech: string[] }) {
   );
 }
 
-function Affordances({ name }: { name: string }) {
+function Affordances({ s }: { s: Specimen }) {
   return (
-    <div className="flex flex-wrap items-center gap-4 text-muted-foreground/70">
-      <span
-        className="inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-widest"
-        title="Repository reference to be catalogued"
-        aria-label={`${name} — GitHub repository to be added`}
-      >
-        <Github className="h-3.5 w-3.5" /> GitHub
-      </span>
-      <span
-        className="inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-widest"
-        title="Live specimen not yet on display"
-        aria-label={`${name} — project link to be added`}
-      >
-        <ExternalLink className="h-3.5 w-3.5" /> View project
-      </span>
-      <span className="label-field text-[0.55rem]">reference pending</span>
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+      {s.repo ? (
+        <>
+          <a
+            href={s.repo.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="link-underline inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-widest text-accent"
+          >
+            <Github className="h-3.5 w-3.5" /> {s.repo.privateArchive ? "Private repository" : "Repository"}
+          </a>
+          <a
+            href={s.repo.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="link-underline inline-flex items-center gap-1.5 font-mono text-[0.68rem] tracking-wide text-muted-foreground"
+          >
+            <ExternalLink className="h-3.5 w-3.5" /> {s.repo.label}
+            {s.repo.privateArchive && (
+              <span className="ml-1 align-middle text-[0.5rem] uppercase tracking-[0.18em] text-muted-foreground/70">
+                · private archive
+              </span>
+            )}
+          </a>
+        </>
+      ) : (
+        <span className="label-field text-[0.55rem]">{s.archiveNote}</span>
+      )}
     </div>
   );
 }
 
 function WorkLog({ items, id }: { items: string[]; id: string }) {
   const [open, setOpen] = useState(false);
-  const visible = open ? items : items.slice(0, 3);
+  const head = items.slice(0, 3);
+  const tail = items.slice(3);
   return (
     <div>
       <span className="label-field">Field observations</span>
       <ul className="mt-3 space-y-2">
-        {visible.map((item) => (
+        {head.map((item) => (
           <li key={item} className="flex gap-3 text-sm leading-relaxed text-foreground/85">
             <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-accent" />
             <span>{item}</span>
           </li>
         ))}
       </ul>
-      {items.length > 3 && (
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls={id}
-          className="mt-4 inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-widest text-accent"
-        >
-          {open ? "Collapse notes" : `Expand notes (+${items.length - 3})`}
-          <ChevronDown
-            className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`}
-          />
-        </button>
+      {tail.length > 0 && (
+        <>
+          <div
+            id={id}
+            className="grid transition-all duration-500 ease-out"
+            style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+          >
+            <div className="overflow-hidden">
+              <ul className="mt-2 space-y-2 border-l border-dotted border-border pl-4">
+                {tail.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-foreground/85">
+                    <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-accent/60" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls={id}
+            className="mt-4 inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-widest text-accent transition-opacity hover:opacity-70"
+          >
+            {open ? "Collapse notes" : `Expand notes (+${tail.length})`}
+            <ChevronDown
+              className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+            />
+          </button>
+        </>
       )}
     </div>
   );
@@ -341,9 +454,12 @@ function WorkLog({ items, id }: { items: string[]; id: string }) {
 function SpecimenHeading({ s }: { s: Specimen }) {
   return (
     <div>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <span className="h-px w-8 bg-accent" />
         <span className="label-field">Specimen {s.n}</span>
+        <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground/80">
+          · {s.focus}
+        </span>
       </div>
       <h3 className="mt-3 font-display text-2xl leading-tight text-primary md:text-3xl">
         {s.name}
@@ -388,22 +504,27 @@ export function Projects() {
             <div className="space-y-4">
               <span className="label-field">Materials</span>
               <TechList tech={featured.tech} />
-              <Affordances name={featured.name} />
+              <Affordances s={featured} />
             </div>
           </div>
 
-          <PlateFrame
-            caption={featured.plateCaption}
-            code={featured.plateCode}
-            className="self-start transition-shadow group-hover:shadow-none"
-          >
-            <FeaturedPlate />
-          </PlateFrame>
+          <div className="flex flex-col gap-5 self-start">
+            <PlateFrame
+              caption={featured.plateCaption}
+              code={featured.plateCode}
+              className="transition-shadow group-hover:shadow-none"
+            >
+              <FeaturedPlate />
+            </PlateFrame>
+            {featured.captures.map((c) => (
+              <FieldCapture key={c.fig} {...c} />
+            ))}
+          </div>
         </article>
 
         {/* Secondary specimens */}
         <div className="mt-14 grid gap-px bg-border lg:grid-cols-2">
-          {rest.map((s, i) => {
+          {rest.map((s) => {
             const Plate = s.plate;
             return (
               <article
@@ -414,14 +535,20 @@ export function Projects() {
                 <PlateFrame caption={s.plateCaption} code={s.plateCode}>
                   <Plate />
                 </PlateFrame>
+                <div
+                  className={`grid gap-4 ${s.captures.length > 1 ? "sm:grid-cols-2" : ""}`}
+                >
+                  {s.captures.map((c) => (
+                    <FieldCapture key={c.fig} {...c} />
+                  ))}
+                </div>
                 <p className="text-sm leading-relaxed text-foreground/85">{s.summary}</p>
                 <WorkLog items={s.work} id={`work-${s.n}`} />
                 <div className="mt-auto space-y-4 border-t border-border pt-5">
                   <span className="label-field">Materials</span>
                   <TechList tech={s.tech} />
-                  <Affordances name={s.name} />
+                  <Affordances s={s} />
                 </div>
-                <span className="sr-only">{`Secondary specimen ${i + 2}`}</span>
               </article>
             );
           })}
