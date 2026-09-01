@@ -6,7 +6,8 @@ const nav = [
   { label: "Projects", href: "#projects", stratum: "01", ready: true },
   { label: "Journey", href: "#journey", stratum: "02", ready: true },
   { label: "Skills", href: "#skills", stratum: "03", ready: true },
-  { label: "Contact", href: "#contact", stratum: "04", ready: false },
+  { label: "Field Record", href: "#field-record", stratum: "04", ready: true },
+  { label: "Contact", href: "#contact", stratum: "05", ready: true },
 ];
 
 
@@ -34,7 +35,6 @@ export function SiteHeader() {
           <Ammonite className="h-8 w-8 text-accent" />
           <span className="leading-none">
             <span className="block font-display text-lg tracking-tight">Arman Rizvi</span>
-            <span className="label-field block">Field Record</span>
           </span>
         </a>
 

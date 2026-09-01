@@ -6,6 +6,9 @@ import { FieldNotes } from "@/components/site/FieldNotes";
 import { Projects } from "@/components/site/Projects";
 import { Journey } from "@/components/site/Journey";
 import { Skills } from "@/components/site/Skills";
+import { FieldRecord } from "@/components/site/FieldRecord";
+import { Contact } from "@/components/site/Contact";
+import { MotionSystem } from "@/components/site/MotionSystem";
 
 const title = "Arman Rizvi — Backend-Oriented Software Engineer";
 const description =
@@ -28,6 +31,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen">
+      <MotionSystem />
       <StrataBackground />
       <SiteHeader />
       <main>
@@ -36,6 +40,8 @@ function Index() {
         <Projects />
         <Journey />
         <Skills />
+        <FieldRecord />
+        <Contact />
       </main>
       <footer className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-5 py-8 md:px-10">
         <span className="label-field">Arman Rizvi · Field Record</span>

@@ -8,7 +8,7 @@ export function StrataBackground() {
       <div className="absolute inset-0 bg-background" />
 
       {/* strata bands */}
-      <svg className="absolute inset-x-0 bottom-0 h-[62vh] w-full" preserveAspectRatio="none" viewBox="0 0 1200 600">
+      <svg className="motion-strata-bands absolute inset-x-0 bottom-0 h-[62vh] w-full" preserveAspectRatio="none" viewBox="0 0 1200 600">
         <g opacity="0.5">
           <path d="M0 240 C 260 200 420 268 700 232 C 900 208 1060 250 1200 224 L1200 600 L0 600Z" fill="var(--ochre)" opacity="0.10" />
           <path d="M0 330 C 300 300 460 356 760 322 C 960 300 1080 336 1200 314 L1200 600 L0 600Z" fill="var(--amber-deep)" opacity="0.12" />
@@ -18,7 +18,7 @@ export function StrataBackground() {
       </svg>
 
       {/* contour / survey grid */}
-      <svg className="absolute inset-0 h-full w-full opacity-[0.14]">
+      <svg className="motion-survey-grid absolute inset-0 h-full w-full opacity-[0.14]">
         <defs>
           <pattern id="survey" width="72" height="72" patternUnits="userSpaceOnUse">
             <path d="M72 0H0V72" fill="none" stroke="var(--strata)" strokeWidth="0.5" />
@@ -28,7 +28,7 @@ export function StrataBackground() {
       </svg>
 
       {/* evolutionary branching, top-right */}
-      <svg className="absolute -right-10 top-0 hidden h-[70vh] w-[42vw] opacity-[0.18] md:block" viewBox="0 0 400 600" fill="none">
+      <svg className="motion-branching absolute -right-10 top-0 hidden h-[70vh] w-[42vw] opacity-[0.18] md:block" viewBox="0 0 400 600" fill="none">
         <g stroke="var(--strata)" strokeWidth="1">
           <path d="M40 580 C 40 420 120 400 140 300 C 158 210 220 190 250 110" />
           <path d="M140 300 C 170 280 230 288 268 240" />

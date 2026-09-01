@@ -254,7 +254,7 @@ export function Skills() {
   const workingSet = primary.slice(1);
 
   return (
-    <section id="skills" className="scroll-mt-20 border-b border-border">
+    <section id="skills" className="scroll-mt-20 border-b border-border motion-section" data-motion="section">
       <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
         {/* Section Header */}
         <div className="flex flex-wrap items-end justify-between gap-6 border-b border-border pb-6">

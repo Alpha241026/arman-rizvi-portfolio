@@ -82,9 +82,7 @@ function Node({ filled = false }: { filled?: boolean }) {
       aria-hidden
       className="relative flex h-3 w-3 shrink-0 items-center justify-center"
     >
-      {/* crosshair ring behind the diamond */}
       <span className="absolute h-3.5 w-3.5 rounded-full border border-accent/40" />
-
       <span
         className={`h-2 w-2 rotate-45 border border-accent ${
           filled ? "bg-accent" : "bg-background"
@@ -110,7 +108,6 @@ function ThemeList({
               ·
             </span>
           )}
-
           <span
             className={
               isSystems
@@ -138,24 +135,20 @@ function JournalEntry({
 
   return (
     <article className="relative grid gap-x-8 gap-y-3 pl-9 md:grid-cols-[12rem_1fr] md:gap-x-10 md:pl-14">
-      {/* timeline node */}
       <span className="absolute left-0 top-1.5 -translate-x-1/2">
         <Node filled={isTurn} />
       </span>
 
-      {/* small drafting tick extending from the spine */}
       <span
         aria-hidden
         className="absolute left-0 top-[0.72rem] h-px w-6 bg-accent/40 md:w-10"
       />
 
-      {/* metadata / title */}
       <header className="md:text-right">
         <div className="flex items-center gap-2 md:justify-end">
           <span className="label-field text-accent">
             Entry {entry.n}
           </span>
-
           <span className="font-mono text-[0.58rem] uppercase tracking-wider text-muted-foreground/70">
             · {entry.stage}
           </span>
@@ -172,9 +165,7 @@ function JournalEntry({
         <ThemeList items={entry.theme} isSystems={isSystems} />
       </header>
 
-      {/* narrative */}
       <div className="max-w-2xl pb-8 md:pb-10">
-        {/* hairline register rule above the body */}
         <span
           aria-hidden
           className="mb-4 block h-px w-8 bg-accent/50"
@@ -189,25 +180,21 @@ function JournalEntry({
           </p>
         ))}
 
-        {/* observation: drafting-bracketed field conclusion */}
         <p className="mt-4 flex items-baseline gap-2.5 rule-hairline pt-2.5">
           <span className="label-field shrink-0 text-[0.55rem] text-accent">
             Obs.
           </span>
-
           <span
             aria-hidden
             className="shrink-0 font-mono text-[0.6rem] text-accent/60"
           >
             ⌐
           </span>
-
           <span className="font-display text-sm italic text-accent md:text-base">
             {entry.observation}
           </span>
         </p>
 
-        {/* entry separator with center tick */}
         {!isLast && (
           <span
             aria-hidden
@@ -225,10 +212,9 @@ export function Journey() {
   return (
     <section
       id="journey"
-      className="scroll-mt-20 border-b border-border"
+      className="scroll-mt-20 border-b border-border motion-section" data-motion="section"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-20">
-        {/* section heading */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <span className="label-field">
@@ -246,15 +232,12 @@ export function Journey() {
           </p>
         </div>
 
-        {/* timeline */}
         <div className="relative mt-10 md:mt-14">
-          {/* main spine */}
           <span
             aria-hidden
             className="absolute bottom-0 left-0 top-0 w-px bg-gradient-to-b from-accent/50 via-border to-accent/40"
           />
 
-          {/* drafting ticks along spine */}
           <span
             aria-hidden
             className="absolute bottom-0 left-0 top-0 hidden w-px md:block"
@@ -264,7 +247,6 @@ export function Journey() {
             }}
           />
 
-          {/* spine origin tick */}
           <span
             aria-hidden
             className="absolute left-0 top-0 h-px w-3 -translate-y-px bg-accent/60"
@@ -278,9 +260,7 @@ export function Journey() {
             />
           ))}
 
-          {/* current field note — culmination of the spine */}
           <div className="relative grid gap-x-8 gap-y-3 pl-9 md:grid-cols-[12rem_1fr] md:gap-x-10 md:pl-14">
-            {/* current node */}
             <span className="absolute left-0 top-1.5 -translate-x-1/2">
               <Node filled />
             </span>
@@ -290,7 +270,6 @@ export function Journey() {
               className="absolute left-0 top-[0.72rem] h-px w-6 bg-accent md:w-10"
             />
 
-            {/* pulsing presence ring for "now" */}
             <span
               aria-hidden
               className="absolute left-0 top-[0.72rem] h-3 w-3 -translate-x-1/2 -translate-y-[5px] animate-ping rounded-full border border-accent/30 [animation-duration:3s]"
@@ -312,22 +291,18 @@ export function Journey() {
 
             <div className="max-w-2xl">
               <div className="plate paper-grain relative p-5 md:p-6">
-                {/* corner registration marks */}
                 <span
                   aria-hidden
                   className="absolute left-2 top-2 h-2 w-2 border-l border-t border-accent/50"
                 />
-
                 <span
                   aria-hidden
                   className="absolute right-2 top-2 h-2 w-2 border-r border-t border-accent/50"
                 />
-
                 <span
                   aria-hidden
                   className="absolute bottom-2 left-2 h-2 w-2 border-b border-l border-accent/50"
                 />
-
                 <span
                   aria-hidden
                   className="absolute bottom-2 right-2 h-2 w-2 border-b border-r border-accent/50"
@@ -356,12 +331,28 @@ export function Journey() {
                 className="mt-3.5 flex items-center gap-2"
               >
                 <span className="h-px w-8 bg-accent/50" />
-
                 <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-muted-foreground">
                   Record ongoing —
                 </span>
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Closing field note — intentionally quiet */}
+        <div className="mt-14 border-t border-border pt-6 md:mt-20">
+          <div className="flex flex-wrap items-baseline justify-between gap-5">
+            <div className="flex items-center gap-3">
+              <span className="label-field text-accent">Field note</span>
+              <span className="h-px w-10 bg-accent/60" />
+              <span className="font-mono text-[0.62rem] uppercase tracking-widest text-muted-foreground">
+                direction remains open
+              </span>
+            </div>
+
+            <p className="font-display text-sm italic text-muted-foreground md:text-base">
+              The path is clearer than it was.
+            </p>
           </div>
         </div>
       </div>

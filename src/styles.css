@@ -164,3 +164,529 @@
     background-size: 100% 1px;
   }
 }
+
+/* --- Field Record / archival evidence --- */
+
+.field-record-document {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  box-shadow: var(--shadow-plate);
+}
+
+.field-record-document img {
+  display: block;
+  filter: saturate(0.82) contrast(0.96);
+  transition:
+    transform 500ms ease,
+    filter 500ms ease;
+}
+
+.field-record-document:hover img {
+  transform: scale(1.025);
+  filter: saturate(0.95) contrast(1);
+}
+
+.field-record-document-stamp {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, transparent);
+  background: color-mix(in oklab, var(--background) 86%, transparent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  backdrop-filter: blur(2px);
+}
+
+.field-record-index {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.field-record-secondary,
+.field-record-support {
+  position: relative;
+}
+
+.field-record-secondary {
+  transition: transform 260ms ease;
+}
+
+.field-record-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.field-record-support {
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--card) 72%, transparent);
+  padding: 1rem;
+  transition:
+    background-color 260ms ease,
+    transform 260ms ease;
+}
+
+.field-record-support:hover {
+  background: var(--color-card);
+  transform: translateY(-2px);
+}
+
+.field-record-quiet {
+  opacity: 0.78;
+}
+
+@media (min-width: 768px) {
+  .field-record-primary {
+    position: relative;
+  }
+
+  .field-record-primary::before {
+    content: "";
+    position: absolute;
+    left: -0.75rem;
+    top: 2.25rem;
+    height: 1px;
+    width: 2rem;
+    background: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-record-document img,
+  .field-record-secondary,
+  .field-record-support {
+    transition: none;
+  }
+}
+/* --- Field-record motion system ----------------------------------------- */
+
+:root {
+  --motion-scroll: 0px;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section reveals are deliberately small: the content should feel uncovered,
+   never launched at the visitor. */
+html.motion-enabled .motion-section > div.mx-auto > * {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 720ms var(--motion-ease),
+    transform 820ms var(--motion-ease);
+}
+
+html.motion-enabled .motion-section.is-visible > div.mx-auto > * {
+  opacity: 1;
+  transform: none;
+}
+
+.motion-section > div.mx-auto > *:nth-child(1) { transition-delay: 40ms; }
+.motion-section > div.mx-auto > *:nth-child(2) { transition-delay: 110ms; }
+.motion-section > div.mx-auto > *:nth-child(3) { transition-delay: 180ms; }
+.motion-section > div.mx-auto > *:nth-child(4) { transition-delay: 250ms; }
+.motion-section > div.mx-auto > *:nth-child(5) { transition-delay: 320ms; }
+
+/* Hero: the record is being uncovered from the surface. */
+.hero-motion > div > * {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  animation: excavation-reveal 900ms var(--motion-ease) forwards;
+}
+
+.hero-motion > div > *:nth-child(1) { animation-delay: 80ms; }
+.hero-motion > div > *:nth-child(2) { animation-delay: 170ms; }
+
+.hero-motion > div > *:first-child > * {
+  animation: hero-detail-reveal 760ms var(--motion-ease) both;
+}
+
+.hero-motion > div > *:first-child > *:nth-child(1) { animation-delay: 160ms; }
+.hero-motion > div > *:first-child > *:nth-child(2) { animation-delay: 260ms; }
+.hero-motion > div > *:first-child > *:nth-child(3) { animation-delay: 360ms; }
+.hero-motion > div > *:first-child > *:nth-child(4) { animation-delay: 470ms; }
+
+.hero-motion figure {
+  transform-origin: 52% 48%;
+  animation: plate-settle 1200ms var(--motion-ease) 180ms both;
+}
+
+.hero-motion figure img {
+  transition: transform 1200ms var(--motion-ease), filter 700ms ease;
+}
+
+.hero-motion figure:hover img {
+  transform: scale(1.018) rotate(0.15deg);
+  filter: saturate(1.04) contrast(1.01);
+}
+
+.hero-motion figure svg {
+  animation: annotation-breathe 7s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.hero-motion ol li {
+  opacity: 0;
+  transform: translate3d(12px, 0, 0);
+  animation: strata-uncover 700ms var(--motion-ease) forwards;
+}
+
+.hero-motion ol li:nth-child(1) { animation-delay: 480ms; }
+.hero-motion ol li:nth-child(2) { animation-delay: 590ms; }
+.hero-motion ol li:nth-child(3) { animation-delay: 700ms; }
+.hero-motion ol li:nth-child(4) { animation-delay: 810ms; }
+
+.hero-motion ol li > span {
+  transition: transform 320ms var(--motion-ease), box-shadow 320ms ease;
+}
+
+.hero-motion ol li:hover > span {
+  transform: scale(1.45);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 12%, transparent);
+}
+
+/* Archival panels gently respond like paper, not cards in a SaaS dashboard. */
+.motion-section article,
+.motion-section figure,
+.motion-section .plate {
+  will-change: transform;
+}
+
+.motion-section article {
+  transition:
+    transform 500ms var(--motion-ease),
+    background-color 350ms ease,
+    border-color 350ms ease;
+}
+
+.motion-section article:hover {
+  transform: translateY(-2px);
+}
+
+/* Journey: the field spine slowly comes alive as entries are uncovered. */
+#journey .relative.mt-10 > span:first-child,
+#journey .relative.mt-10 > span:nth-child(2) {
+  transform-origin: top;
+  animation: strata-line-breathe 8s ease-in-out infinite;
+}
+
+#journey article .absolute.left-0 > span:first-child {
+  transition: transform 400ms var(--motion-ease);
+}
+
+#journey article:hover .absolute.left-0 > span:first-child {
+  transform: scale(1.25);
+}
+
+#journey article:hover h3 {
+  letter-spacing: 0.005em;
+  transition: letter-spacing 450ms ease;
+}
+
+/* Projects: technical diagrams behave like active field drawings. */
+#projects article:hover .plate {
+  box-shadow: 0 18px 40px -22px color-mix(in oklab, var(--strata) 62%, transparent);
+}
+
+#projects svg circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#projects article:hover svg circle {
+  animation: specimen-pulse 1.8s ease-in-out infinite;
+}
+
+#projects article:hover svg path[stroke="var(--ochre)"] {
+  stroke-dashoffset: -18;
+  animation: trace-drift 2.8s linear infinite;
+}
+
+#projects a:hover svg,
+#projects button:hover svg {
+  transform: translate3d(2px, -2px, 0);
+}
+
+/* Skills: inventory rows feel catalogued one specimen at a time. */
+#skills li.group {
+  position: relative;
+  transition:
+    color 260ms ease,
+    padding-left 300ms var(--motion-ease);
+}
+
+#skills li.group:hover {
+  padding-left: 0.35rem;
+}
+
+#skills li.group::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 320ms var(--motion-ease);
+}
+
+#skills li.group:hover::before {
+  width: 0.22rem;
+}
+
+#skills svg {
+  transition: transform 900ms var(--motion-ease);
+}
+
+#skills svg:hover {
+  transform: translateX(4px);
+}
+
+/* Field Record: evidence sheets get a tiny archival registration shift. */
+#field-record .field-record-document,
+#field-record article.group {
+  transition:
+    transform 550ms var(--motion-ease),
+    box-shadow 550ms var(--motion-ease),
+    background-color 350ms ease;
+}
+
+#field-record .field-record-document:hover,
+#field-record article.group:hover {
+  transform: translateY(-3px) rotate(-0.15deg);
+}
+
+#field-record article.group:hover .field-record-document-stamp {
+  letter-spacing: 0.2em;
+}
+
+#field-record .field-record-document-stamp {
+  transition: letter-spacing 350ms ease, transform 350ms var(--motion-ease);
+}
+
+#field-record .field-record-document:hover .field-record-document-stamp {
+  transform: translateY(-1px);
+}
+
+/* Contact: correspondence plate has a quiet instrument-panel heartbeat. */
+#contact .plate:first-child svg {
+  animation: correspondence-orbit 18s linear infinite;
+  transform-origin: center;
+}
+
+#contact .plate:first-child svg circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#contact .plate:first-child:hover svg circle:first-of-type {
+  animation: specimen-pulse 2.4s ease-in-out infinite;
+}
+
+#contact a.group:hover {
+  background: color-mix(in oklab, var(--accent) 4%, transparent);
+}
+
+#contact a.group > span:first-child {
+  transition:
+    transform 350ms var(--motion-ease),
+    border-color 260ms ease;
+}
+
+#contact a.group:hover > span:first-child {
+  transform: rotate(-2deg) translateY(-1px);
+}
+
+#contact .plate:last-child:hover {
+  transform: translateY(-3px) rotate(0.15deg);
+  transition: transform 550ms var(--motion-ease), box-shadow 550ms var(--motion-ease);
+}
+
+/* Living background: the survey layer drifts almost imperceptibly with scroll. */
+.motion-strata-bands {
+  transform: translate3d(0, calc(var(--motion-scroll) * -0.45), 0);
+  transition: transform 80ms linear;
+}
+
+.motion-survey-grid {
+  transform: translate3d(0, calc(var(--motion-scroll) * -0.12), 0);
+}
+
+.motion-branching {
+  transform: translate3d(0, calc(var(--motion-scroll) * -0.28), 0);
+  transition: transform 80ms linear;
+}
+
+.motion-branching g:last-child circle {
+  animation: node-flicker 4.8s ease-in-out infinite;
+}
+
+@keyframes excavation-reveal {
+  from { opacity: 0; transform: translate3d(0, 20px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-detail-reveal {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes plate-settle {
+  0% { opacity: 0; transform: translate3d(18px, 10px, 0) rotate(0.6deg) scale(0.985); }
+  70% { opacity: 1; transform: translate3d(-2px, -1px, 0) rotate(-0.08deg) scale(1.002); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes strata-uncover {
+  from { opacity: 0; transform: translate3d(12px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes annotation-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.008); }
+}
+
+@keyframes strata-line-breathe {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+@keyframes specimen-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50% { transform: scale(1.35); opacity: 1; }
+}
+
+@keyframes trace-drift {
+  to { stroke-dashoffset: -20; }
+}
+
+@keyframes correspondence-orbit {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(0.35deg) scale(1.004); }
+}
+
+@keyframes node-flicker {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  html.motion-enabled .motion-section > div.mx-auto > *,
+  .hero-motion > div > *,
+  .hero-motion > div > *:first-child > *,
+  .hero-motion ol li {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .hero-motion figure svg,
+  .hero-motion figure,
+  #journey .relative.mt-10 > span:first-child,
+  #journey .relative.mt-10 > span:nth-child(2),
+  #contact .plate:first-child svg,
+  .motion-branching,
+  .motion-strata-bands,
+  .motion-survey-grid {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Secondary choreography: individual specimens do not arrive as one block. */
+#overview.is-visible .grid > article,
+#skills.is-visible .mt-12.md\:mt-16 > *,
+#skills.is-visible .mt-16.md\:mt-20 .grid > *,
+#contact.is-visible .divide-y > a.group,
+#projects.is-visible > div.mx-auto > .mt-12.md\:mt-16 > article,
+#field-record.is-visible section.relative.mt-12 > article,
+#field-record.is-visible section.relative.mt-24 > .mt-0 > article,
+#journey.is-visible .relative.mt-10 > article {
+  animation: specimen-uncover 760ms var(--motion-ease) both;
+}
+
+#overview.is-visible .grid > article:nth-child(1),
+#skills.is-visible .mt-12.md\:mt-16 > *:nth-child(1),
+#skills.is-visible .mt-16.md\:mt-20 .grid > *:nth-child(1),
+#contact.is-visible .divide-y > a.group:nth-child(1),
+#projects.is-visible > div.mx-auto > .mt-12.md\:mt-16 > article:nth-child(1),
+#field-record.is-visible section.relative.mt-12 > article:nth-child(1),
+#field-record.is-visible section.relative.mt-24 > .mt-0 > article:nth-child(1),
+#journey.is-visible .relative.mt-10 > article:nth-child(1) { animation-delay: 120ms; }
+
+#overview.is-visible .grid > article:nth-child(2),
+#skills.is-visible .mt-12.md\:mt-16 > *:nth-child(2),
+#skills.is-visible .mt-16.md\:mt-20 .grid > *:nth-child(2),
+#contact.is-visible .divide-y > a.group:nth-child(2),
+#projects.is-visible > div.mx-auto > .mt-12.md\:mt-16 > article:nth-child(2),
+#field-record.is-visible section.relative.mt-12 > article:nth-child(2),
+#field-record.is-visible section.relative.mt-24 > .mt-0 > article:nth-child(2),
+#journey.is-visible .relative.mt-10 > article:nth-child(2) { animation-delay: 230ms; }
+
+#overview.is-visible .grid > article:nth-child(3),
+#skills.is-visible .mt-16.md\:mt-20 .grid > *:nth-child(3),
+#contact.is-visible .divide-y > a.group:nth-child(3),
+#field-record.is-visible section.relative.mt-12 > article:nth-child(3),
+#journey.is-visible .relative.mt-10 > article:nth-child(3) { animation-delay: 340ms; }
+
+#skills.is-visible .mt-16.md\:mt-20 .grid > *:nth-child(4),
+#journey.is-visible .relative.mt-10 > article:nth-child(4) { animation-delay: 450ms; }
+
+#field-record.is-visible section.relative.mt-24 > .mt-0 > article {
+  animation-name: archive-uncover;
+}
+
+@keyframes specimen-uncover {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes archive-uncover {
+  from { opacity: 0; transform: translate3d(0, 16px, 0) rotate(0.25deg); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Hovering a specimen feels like moving a paper sheet under a lamp. */
+#overview article,
+#skills .plate,
+#projects article,
+#journey article,
+#contact .plate {
+  transform-origin: center center;
+}
+
+#overview article:hover,
+#skills .plate:hover,
+#projects article:hover,
+#journey article:hover,
+#contact .plate:hover {
+  box-shadow: var(--shadow-plate), 0 0 0 1px color-mix(in oklab, var(--accent) 8%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #overview.is-visible .grid > article,
+  #skills.is-visible .mt-12.md\:mt-16 > *,
+  #skills.is-visible .mt-16.md\:mt-20 .grid > *,
+  #contact.is-visible .divide-y > a.group,
+  #projects.is-visible > div.mx-auto > .mt-12.md\:mt-16 > article,
+  #field-record.is-visible section.relative.mt-12 > article,
+  #field-record.is-visible section.relative.mt-24 > .mt-0 > article,
+  #journey.is-visible .relative.mt-10 > article {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+}

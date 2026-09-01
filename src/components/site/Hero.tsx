@@ -10,7 +10,7 @@ const strata = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative border-b border-border">
+    <section id="top" className="relative border-b border-border hero-motion">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-14 md:px-10 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         {/* Left: editorial title block */}
         <div className="flex flex-col justify-center">
@@ -41,19 +41,40 @@ export function Hero() {
               Explore the record
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
+
             <div className="flex items-center gap-4 text-muted-foreground/70">
-              <span aria-label="GitHub — to be added" title="To be added">
+              <a
+                href="https://github.com/Alpha241026"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                title="GitHub"
+                className="transition-colors hover:text-accent"
+              >
                 <Github className="h-5 w-5" />
-              </span>
-              <span aria-label="LinkedIn — to be added" title="To be added">
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/arman-rizvi-lpu/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="transition-colors hover:text-accent"
+              >
                 <Linkedin className="h-5 w-5" />
-              </span>
-              <span aria-label="Email — to be added" title="To be added">
+              </a>
+
+              <a
+                href="mailto:rizviarman99@gmail.com"
+                aria-label="Email"
+                title="Email"
+                className="transition-colors hover:text-accent"
+              >
                 <Mail className="h-5 w-5" />
-              </span>
+              </a>
             </div>
           </div>
-
         </div>
 
         {/* Right: illustrated plate + stratigraphic column */}
@@ -66,6 +87,7 @@ export function Hero() {
               height={1024}
               className="h-full w-full object-cover"
             />
+
             {/* fine annotation overlay — rewards closer inspection */}
             <svg
               aria-hidden
@@ -78,11 +100,13 @@ export function Hero() {
                 <path d="M232 34h34M232 34l-14 10" strokeDasharray="2 2" />
                 <path d="M34 168h30M34 168l12-9" strokeDasharray="2 2" />
               </g>
+
               <g fill="var(--ochre)">
                 <circle cx="218" cy="44" r="1.2" />
                 <circle cx="46" cy="159" r="1.2" />
               </g>
             </svg>
+
             <figcaption className="mt-3 flex items-baseline justify-between gap-4 border-t border-border pt-2">
               <span className="label-field">Plate I — Comparative Study</span>
               <span className="font-mono text-[0.65rem] text-muted-foreground">
@@ -91,17 +115,28 @@ export function Hero() {
             </figcaption>
           </figure>
 
-
           <ol className="relative flex flex-col justify-between gap-5 border-l border-border pl-5 sm:w-52">
             {strata.map((s, i) => (
               <li key={s.era} className="relative">
                 <span
                   className="absolute -left-[1.55rem] top-1.5 h-2 w-2 rounded-full border border-accent"
-                  style={{ backgroundColor: i === 0 ? "var(--ochre)" : "var(--background)" }}
+                  style={{
+                    backgroundColor:
+                      i === 0 ? "var(--ochre)" : "var(--background)",
+                  }}
                 />
-                <p className="font-display text-sm uppercase tracking-widest text-primary">{s.era}</p>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.note}</p>
-                <p className="mt-1 font-mono text-[0.6rem] text-accent">{s.depth}</p>
+
+                <p className="font-display text-sm uppercase tracking-widest text-primary">
+                  {s.era}
+                </p>
+
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  {s.note}
+                </p>
+
+                <p className="mt-1 font-mono text-[0.6rem] text-accent">
+                  {s.depth}
+                </p>
               </li>
             ))}
           </ol>

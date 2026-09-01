@@ -18,7 +18,7 @@ const notes = [
 
 export function FieldNotes() {
   return (
-    <section id="overview" className="border-b border-border">
+    <section id="overview" className="border-b border-border motion-section" data-motion="section">
       <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
