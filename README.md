@@ -1,24 +1,36 @@
-# Portfolio Seed
+# Arman Rizvi — Portfolio
 
-using minimal tokens, create a new empty frontend project for a personal developer portfolio. Do not build the portfolio yet.
+Personal developer portfolio documenting selected projects, technical growth, and field records through a geological / archaeological-inspired visual language.
 
-This project was built with [Lovable](https://lovable.dev).
+## Built With
 
-## Build with Lovable
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide React
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/61bd779b-e929-4b92-8669-ae4bb663a26f).
+## Featured Projects
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- **Chimera** — Developer tooling / systems project
+- **MemoryTrail** — Travel image gallery
+- **SynClip** — Live text sharing application
 
-## Development
+## Run Locally
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+git clone https://github.com/Alpha241026/arman-rizvi-portfolio.git
+cd arman-rizvi-portfolio
+npm install
 npm run dev
 ```
+
+## Production Build
+
+```bash
+npm run build
+```
+
+## License
+
+Personal portfolio project.
